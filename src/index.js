@@ -1,3 +1,4 @@
+import { image2grey } from 'Utils'
 document.addEventListener("change", (e) => {
   const file = e.target.files[0];
   const beforeCanvas = document.querySelector("#before");
@@ -18,14 +19,7 @@ document.addEventListener("change", (e) => {
       // const loadBase64 = beforeCanvas.toDataURL();
       // 2gery
       const imageData = beforeCtx.getImageData(0, 0, 200, 200);
-      const { data } = imageData;
-      for (let i = 0; i < data.length; i += 4) {
-        const grey = (data[i] + data[i + 1] + data[i + 2]) / 3;
-        data[i] = grey;
-        data[i + 1] = grey;
-        data[i + 2] = grey;
-      }
-      console.log("imageData", imageData);
+      image2grey(imageData)
       afterCtx.putImageData(imageData, 0, 0);
     };
   };
